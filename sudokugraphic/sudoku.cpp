@@ -10,6 +10,7 @@ sudoku::sudoku(std::array<int,81> a,std::array<int,81> b)
     //cette méthode initialise le sudoku, un sudoku regroupe 2 arrays étant ses attributs, 1 représentant la grille incomplète étant modifiée
     //et l'autre la grille solution, par défaut un sudoku vide est créé à partir de 2 arrays remplis de zéros
     this->m_work_array=a;
+    this->m_test_array=a;
     this->m_completed_array=b;
 }
 
@@ -51,6 +52,13 @@ void sudoku::updatewg(int i,std::string s)
         int a =std::stoi(s);
         m_work_array[i]=a;
     }else{m_work_array[i]=0;std::cout<<"Veuillez rentrer un chiffre entre 1 et 9"<<std::endl;}
+
+}
+
+void sudoku::updatewa(int i,int k)
+{
+    //méthode permettant d'actualiser l'attribut m_work_array, lorsqu'un int est rentré dans une case d'indice i
+    m_work_array[i]=k;
 
 }
 
@@ -108,11 +116,6 @@ bool sudoku::isInBox(int num, int ind)
     return false;
 }
 
-void sudoku::solve()
-{
-    //résout le sudoku grace à le récursivité et au bactracking
-
-}
 
 void sudoku::find_possible_numbers(){
     //remplit la liste m_possible_numbers avec l'ensemble des nombres possibles pour chaque case.
@@ -133,8 +136,11 @@ void sudoku::find_possible_numbers(){
 
     }
 void sudoku::number_of_candidates(){
+    //méthode qui permet d'associer à chaque indice de case i le nombre de candidats possibles
+    //remplit l'array d'array m_number_of_candidates
     for (int i =0; i<81; i++)
     {
+        this->find_possible_numbers();
         int candidats = m_possible_numbers[i];
         int c=0;
         std::array<std::uint16_t,9> masks= {1<<1,1<<2,1<<3,1<<4,1<<5,1<<6,1<<7,1<<8,1<<9};
@@ -147,6 +153,47 @@ void sudoku::number_of_candidates(){
         c=0;
 
 }
+}
+void sudoku::listedeparcours()
+{
+    //méthode qui construit la liste chainée de parcours pour d'abord partir des cases avec le moins de candidats potentiels
+    this->number_of_candidates();
+    std::sort(std::begin(m_number_of_candidates), std::end(m_number_of_candidates));
+    for (int i =0; i<81; i++)
+    {m_listedeparcours.insertnoeud(m_number_of_candidates[i][1]);}
+
+
+}
+
+bool sudoku::solve()
+{
+    //résout le sudoku grace à le récursivité et au bactracking
+    this->listedeparcours();
+    if (m_listedeparcours.head==NULL)
+    {return true;}
+    int i=m_listedeparcours.head->data;
+    int k;
+    for (k=1;k<10;k++){
+        if(!this->isInLine(k,i) && !this->isInColumn(k,i) && !this->isInBox(k,i)){
+
+            this->updatewa(i,k);
+            m_listedeparcours.head=m_listedeparcours.head->next;
+            if(this->solve()){
+                m_test_array[i]=k;
+                return true;
+            }
+            this->updatewa(i,0);
+        }
+    }
+    return false;
+
+}
+
+std::array<int,81> sudoku::solution()
+{
+    //retourne l'array solution
+    this->solve();
+    return m_test_array;
 }
 
 

@@ -9,9 +9,10 @@ using namespace std;
 
 // classe listechainee pour implémenter une liste chainée
 class listechainee {
-    noeud* head;
+
 
 public:
+    noeud* head;
     // constructeur par défaut
     listechainee() { head = NULL; }
 

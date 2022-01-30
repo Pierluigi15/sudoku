@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <array>
 #include <QLineEdit>
-#include "grid.h"
 #include "sudoku.h"
 
 QT_BEGIN_NAMESPACE

@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <array>
-#include "grid.h"
 #include <iostream>
 #include <QLineEdit>
 #include "sudoku.h"

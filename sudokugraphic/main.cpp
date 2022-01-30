@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include<iostream>
 #include<array>
-#include "grid.h"
 #include "sudoku.h"
 #include "listechainee.h"
 #include "noeud.h"
@@ -36,21 +35,18 @@ int main(int argc, char *argv[])
     sudoku_test.number_of_candidates();
     cout<<"candidats 0 :"<<sudoku_test.m_number_of_candidates[0][0]<<endl;
     cout<<"indice 0 :"<<sudoku_test.m_number_of_candidates[0][1]<<endl;
-    listechainee list;
-    list.insertnoeud(1);
-    list.insertnoeud(2);
-    list.insertnoeud(3);
-    list.insertnoeud(4);
-
-    cout << "Elements of the list are: ";
-    list.printList();
-    cout << endl;
+    sort(begin(sudoku_test.m_number_of_candidates), end(sudoku_test.m_number_of_candidates));
+    cout<<"candidats 0 :"<<sudoku_test.m_number_of_candidates[0][0]<<endl;
+    cout<<"indice 0 :"<<sudoku_test.m_number_of_candidates[0][1]<<endl;
+    sudoku_test.listedeparcours();
+    sudoku_test.solve();
+    cout<<sudoku_test.solution()[0]<<endl;
 
 
-    QApplication a(argc, argv);
-    MainWindow w ;
-    w.show();
+//    QApplication a(argc, argv);
+//    MainWindow w ;
+//    w.show();
 
-    return a.exec();
+//    return a.exec();
     return 1;
 }
