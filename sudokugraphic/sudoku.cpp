@@ -124,19 +124,29 @@ void sudoku::find_possible_numbers(){
 
             if (isPossible(j,i))
             {
-//                if (i==0){std::cout<<"case 0 :"<<j<<std::endl;};
                 std::uint16_t mask=masks[j-1];
                 case_i|=mask;
-//                if (i==0){std::cout<<"case_i vaut "<<case_i<<" et le masque vaut "<<mask<<std::endl;};
-
             }
             m_possible_numbers[i]=case_i;
-
-
-
-
         }
+    }
 
     }
+void sudoku::number_of_candidates(){
+    for (int i =0; i<81; i++)
+    {
+        int candidats = m_possible_numbers[i];
+        int c=0;
+        std::array<std::uint16_t,9> masks= {1<<1,1<<2,1<<3,1<<4,1<<5,1<<6,1<<7,1<<8,1<<9};
+        for (int j=0; j<9;j++)
+        {
+                if ((candidats & masks[j])!=0)
+                    c++;
+        }
+        m_number_of_candidates[i]={c,i};
+        c=0;
+
 }
+}
+
 

@@ -17,7 +17,10 @@ public:
     bool isInBox(int num, int ind);
     void solve();
     void find_possible_numbers();
+    void number_of_candidates();
     std::array<int,81> m_possible_numbers;
+    std::array<std::array<int,2>,81> m_number_of_candidates;
+
 
 private:
    std::array<int,81> m_work_array;

@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
 //    cout<<"0"<<(0b000000100 & 1<<2)<<endl;
     cout<<sudoku_test.m_possible_numbers[0]<<endl;
 //    cout<<sudoku_test.m_possible_numbers[0]<<endl;
+    sudoku_test.number_of_candidates();
+    cout<<"candidats 0 :"<<sudoku_test.m_number_of_candidates[0][0]<<endl;
+    cout<<"indice 0 :"<<sudoku_test.m_number_of_candidates[0][1]<<endl;
 
 
     QApplication a(argc, argv);
