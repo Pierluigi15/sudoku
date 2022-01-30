@@ -10,13 +10,16 @@ CONFIG += c++20
 
 SOURCES += \
     grid.cpp \
+    listechainee.cpp \
     main.cpp \
     mainwindow.cpp \
     sudoku.cpp
 
 HEADERS += \
     grid.h \
+    listechainee.h \
     mainwindow.h \
+    noeud.h \
     sudoku.h
 
 FORMS += \
