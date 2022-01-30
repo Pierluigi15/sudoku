@@ -11,6 +11,11 @@ public:
     std::array<int,81> getwg();
     std::array<int,81> getcg();
     void updatewg(int i, std::string s);
+    bool isPossible(int num, int ind);
+    bool isInLine(int num, int ind);
+    bool isInColumn(int num, int ind);
+    bool isInBox(int num, int ind);
+    void solve();
 
 private:
    std::array<int,81> m_work_array;
