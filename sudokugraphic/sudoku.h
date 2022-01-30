@@ -16,10 +16,14 @@ public:
     bool isInColumn(int num, int ind);
     bool isInBox(int num, int ind);
     void solve();
+    void find_possible_numbers();
+    std::array<int,81> m_possible_numbers;
 
 private:
    std::array<int,81> m_work_array;
    std::array<int,81> m_completed_array;
+
+
 };
 
 #endif // SUDOKU_H

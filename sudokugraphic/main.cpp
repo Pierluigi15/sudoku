@@ -23,9 +23,14 @@ int main(int argc, char *argv[])
 //    cout<<sudoku_test.isInBox(4,34)<<endl;
 //    cout<<sudoku_test.isInBox(4,40)<<endl;
     //tests fonction isPossible
-    cout<<sudoku_test.isPossible(2,2)<<endl;
-    cout<<sudoku_test.isPossible(2,3)<<endl;
-    cout<<sudoku_test.isPossible(2,0)<<endl;
+//    cout<<sudoku_test.isPossible(2,2)<<endl;
+//    cout<<sudoku_test.isPossible(2,3)<<endl;
+//    cout<<sudoku_test.isPossible(2,0)<<endl;
+    sudoku_test.find_possible_numbers();
+//    cout<<"1"<<(0b000000100 & 0b00000100)<<endl;
+//    cout<<"0"<<(0b000000100 & 1<<2)<<endl;
+    cout<<sudoku_test.m_possible_numbers[0]<<endl;
+//    cout<<sudoku_test.m_possible_numbers[0]<<endl;
 
 
     QApplication a(argc, argv);
@@ -33,4 +38,5 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
+    return 1;
 }

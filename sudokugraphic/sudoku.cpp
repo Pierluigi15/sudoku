@@ -2,7 +2,7 @@
 #include<iostream>
 #include <algorithm> // for std::find
 #include <iterator> // for std::begin, std::end
-
+#include <cassert>
 
 
 sudoku::sudoku(std::array<int,81> a,std::array<int,81> b)
@@ -59,7 +59,7 @@ bool sudoku::isPossible(int num, int ind)
     //cette fonction vérifie si le placement de num dans la case correspondant à l'indice ind
     //est compatible avec les autres chiffres présent dans la case ligne et colonne.
 
-    if (not isInLine(num,ind)&& not isInColumn(num,ind)&& not isInBox(num,ind)){
+    if (not isInLine(num,ind)&& not isInColumn(num,ind)&& not isInBox(num,ind)&& m_work_array[ind]==0){
         return true;
     }
 
@@ -113,3 +113,30 @@ void sudoku::solve()
     //résout le sudoku grace à le récursivité et au bactracking
 
 }
+
+void sudoku::find_possible_numbers(){
+    //remplit la liste m_possible_numbers avec l'ensemble des nombres possibles pour chaque case.
+    //on utilise les opérations bitwise pour représenter l'ensemble des nombres possiblement présent dans la case en un seul entier.
+    for (int i=0;i<81;i++){
+        std::array<std::uint16_t,9> masks= {1<<1,1<<2,1<<3,1<<4,1<<5,1<<6,1<<7,1<<8,1<<9};
+        uint16_t case_i{};
+        for (int j=1; j<10;j++){
+
+            if (isPossible(j,i))
+            {
+//                if (i==0){std::cout<<"case 0 :"<<j<<std::endl;};
+                std::uint16_t mask=masks[j-1];
+                case_i|=mask;
+//                if (i==0){std::cout<<"case_i vaut "<<case_i<<" et le masque vaut "<<mask<<std::endl;};
+
+            }
+            m_possible_numbers[i]=case_i;
+
+
+
+
+        }
+
+    }
+}
+
